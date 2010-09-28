@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Getting Started Example</title>
+    <link rel="stylesheet" type="text/css" href="../lib/extjs/resources/css/ext-all.css" />
+ 	  <script type="text/javascript" src="../lib/extjs/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../lib/extjs/ext-all.js"></script>
+  	<style>
+  		.milton-icon { background: url(images/milton-head-icon.png) no-repeat; }
+  		.ext-el-mask { background-color:#FFF; }
+  	</style>
+  	<script>
+    if (Ext.BLANK_IMAGE_URL.substr(0, 5) != 'data:') {
+      Ext.BLANK_IMAGE_URL = '../lib/extjs/resources/images/default/s.gif';
+    }
+  	Ext.onReady(function(){
+  		Ext.Msg.show({
+  			title:'Milton',
+  			msg: 'Have you seen my stapler?',
+  			buttons: {yes: true, no: true, cancel: true},
+  			icon: 'milton-icon',
+  			defaultButton: 'no',
+  			fn: function(btn) {
+  				switch(btn){
+  					case 'yes':
+  						Ext.Msg.prompt('Milton', 'Where is it?', function(btn,txt) {
+  							if (txt.toLowerCase() == 'the office') {
+  								Ext.get('my_id').dom.innerHTML = 'Work Sucks';
+  							}else{
+  								Ext.get('my_id').dom.innerHTML = txt;
+  							}
+  							Ext.DomHelper.applyStyles('my_id',{background: 'transparent url(images/stapler.png) 50% 50% no-repeat'});
+  						});
+  					break;
+  					case 'no':
+  						Ext.Msg.alert('Milton', 'Im going to burn the building down!', function() {
+  							Ext.DomHelper.applyStyles('my_id',{'background': 'transparent url(images/fire.png) 0 100% repeat-x'});
+  							Ext.DomHelper.applyStyles(Ext.getBody(),{'background-color': '#FF0000'});
+  							Ext.getBody().highlight('FFCC00',{endColor:'FF0000', duration: 6});
+  						});
+  					break;
+  					case 'cancel':
+  						Ext.Msg.wait('Saving tables to disk...','File Copy');
+  					break;
+  				}
+  			}
+  		});
+  	});
+  	</script>
+</head>
+<body>
+	<div id='my_id' style='width:100%;height:100%;overflow:hidden;text-align:center;'></div>
+</body>
+</html>
