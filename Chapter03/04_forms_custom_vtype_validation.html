@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Forms Example</title>
+    <link rel="stylesheet" type="text/css" href="../lib/extjs/resources/css/ext-all.css" />
+ 	  <script type="text/javascript" src="../lib/extjs/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../lib/extjs/ext-all.js"></script>
+    <script>
+    if (Ext.BLANK_IMAGE_URL.substr(0, 5) != 'data:') {
+      Ext.BLANK_IMAGE_URL = '../lib/extjs/resources/images/default/s.gif';
+    }
+        
+    Ext.apply(Ext.form.VTypes, {
+      nameVal: /^[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+$/,
+      nameMask: /[A-Za-z ]/,
+      nameText: 'Invalid Director Name.',
+      name: function(v) {
+        return this.nameVal.test(v);
+      }
+    });
+      
+    Ext.onReady(function(){
+      Ext.QuickTips.init();    
+    	new Ext.FormPanel({ 
+    		url: 'movie-form-submit.php',
+    		renderTo: Ext.getBody(),
+    		frame: true,
+    		title: 'Movie Information Form',
+    		width: 250,
+    		items: [{
+    			xtype: 'textfield',
+    			fieldLabel: 'Title',
+    			name: 'title',
+    			allowBlank: false
+  	    },{
+    			xtype: 'textfield',
+    			fieldLabel: 'Director',
+    			name: 'director',
+    			vtype: 'name'
+  	    },{
+    			xtype: 'datefield',
+    			fieldLabel: 'Released',
+    			name: 'released',
+    			disabledDays: [1,2,3,4,5]
+  	    }]
+    	});
+    });
+    </script>
+</head>
+<body>
+</body>
+</html>
